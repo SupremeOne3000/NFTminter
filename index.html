@@ -47,7 +47,7 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .form-control {
-      background-color: ##ffffff;
+      background-color: #ffffff;
       border: 1px solid #30363d;
       color: #e6edf3;
     }
@@ -92,7 +92,7 @@
       </div>
       <div class="col-md-6 text-md-start hero-text">
         <h1>Hi, I'm <span class="text-info">Mithun</span></h1>
-        <p>5th Sem ECE Student — Blockchain Enthusiast</p>
+        <p>5th Sem ECM Student — Blockchain Enthusiast</p>
       </div>
     </div>
   </section>
@@ -113,7 +113,9 @@
               <input type="text" class="form-control" id="walletAddress" placeholder="Connect your MetaMask wallet" readonly>
               <button type="button" id="connectWallet" class="btn btn-primary">Connect</button>
             </div>
+          
           </div>
+          
 
           <!-- Valuable Text -->
           <div class="mb-3">
@@ -121,16 +123,23 @@
             <div class="input-group">
               <input type="text" class="form-control" id="valuableText" placeholder="Enter valuable text" required>
             </div>
+            
           </div>
+          
 
 
           <div class="mb-3">
             <label for="contractAddress" class="form-label">Smart Contract Address</label>
             <input type="text" class="form-control" id="contractAddress" placeholder="0x..." required>
           </div>
+          <label for="NFT message" class="form-label">NFT Message</label>
+          <input type="text" class="form-control" id="nftMessage" placeholder="Your NFT message will appear here" readonly>
+          
+
 
           <div class="d-grid">
-            <button onclick="mintNFT()" class="btn btn-primary btn-lg">Mint NFT</button>
+           
+            <button onclick="mintNFT()" style="margin-top:20px;" class="btn btn-primary btn-lg">Mint NFT</button>
           </div>
           <div id="status" class="status"></div>
         </form>
@@ -141,7 +150,7 @@
   <script>
     let provider, signer, userAddress;
 
-    const CONTRACT_ADDRESS = "0x04a6152127B04b984A420Dca3D7bd794358eaE3e";
+    const CONTRACT_ADDRESS = "0x25cA6E64d733747dcc399D95Ed712b51Cd482ab2";
     const ABI = [
       {
         "inputs": [{"internalType":"string","name":"text","type":"string"}],
@@ -209,4 +218,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
