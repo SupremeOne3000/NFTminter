@@ -9,14 +9,12 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      /* Neon Theme: Dark background, light text */
-      background-color: #121212;
-      color: #f0f0f0;
+      background-color: #f8f9fa;
+      color: #212529;
     }
     .hero-section {
       padding: 60px 0;
-      /* Neon Theme: Darker gradient */
-      background: linear-gradient(135deg, #1f005c, #000);
+      background: linear-gradient(135deg, #007bff, #6610f2);
       color: white;
     }
     .hero-img {
@@ -24,101 +22,25 @@
       height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      /* Neon Theme: Neon cyan border */
-      border: 5px solid #00ffff;
-      box-shadow: 0 0 15px #00ffff;
+      border: 5px solid white;
     }
     .minter-section {
       padding: 60px 0;
     }
     .card {
       border-radius: 15px;
-      /* Neon Theme: Dark card, neon border */
-      background-color: #1e1e1e;
-      border: 1px solid #00ffff;
-      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     footer {
-      background-color: #1a1a1a;
+      background-color: #212529;
       color: white;
       padding: 15px 0;
       text-align: center;
-      border-top: 1px solid #333;
-    }
-    
-    /* Neon Text */
-    h1, h3.fw-semibold {
-      color: #00ffff;
-      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-    }
-    .navbar-brand {
-      color: #39ff14 !important; /* Neon Green */
-      text-shadow: 0 0 5px #39ff14;
-    }
-    
-    /* Neon Forms */
-    .form-control {
-      background-color: #2a2a2a;
-      color: #f0f0f0;
-      border: 1px solid #444;
-    }
-    .form-control:focus {
-      background-color: #2a2a2a;
-      color: #f0f0f0;
-      border-color: #00ffff;
-      box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-    }
-    .form-label {
-      color: #f0f0f0;
-    }
-
-    /* Neon Buttons */
-    .btn-primary {
-      background-color: #00ffff;
-      border-color: #00ffff;
-      color: #121212;
-      font-weight: bold;
-      box-shadow: 0 0 8px #00ffff;
-      transition: all 0.2s ease;
-    }
-    .btn-primary:hover, .btn-primary:focus {
-      background-color: #2affff;
-      border-color: #2affff;
-      color: #121212;
-      box-shadow: 0 0 15px #00ffff;
-    }
-    
-    .btn-success {
-      background-color: #39ff14;
-      border-color: #39ff14;
-      color: #121212;
-      font-weight: bold;
-      box-shadow: 0 0 8px #39ff14;
-      transition: all 0.2s ease;
-    }
-    .btn-success:hover, .btn-success:focus {
-      background-color: #5bff3a;
-      border-color: #5bff3a;
-      color: #121212;
-      box-shadow: 0 0 15px #39ff14;
-    }
-
-    .nav-link {
-      color: #f0f0f0;
-    }
-    .nav-link:hover {
-      color: #00ffff;
-      text-shadow: 0 0 5px #00ffff;
-    }
-
-    /* Make readonly input look correct in dark mode */
-    input:read-only {
-        background-color: #333 !important;
-        color: #aaa !important;
     }
   </style>
 </head>
 <body>
+  <!--Sticky Navbar with Link to LinkdIn and Github and Begins with Name : NFt Miner-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
       <a class="navbar-brand fw-bold" href="#">NFT Minter</a>
@@ -138,11 +60,12 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
   <section class="hero-section text-center text-md-start">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-5 mb-4 mb-md-0 text-center">
-          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fbeaus81%2Fcool-profile-pics-yall%2F&psig=AOvVaw1hV8p4Qv3THgqfnPf9sSYi&ust=1761884446120000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMiB_ZeJy5ADFQAAAAAdAAAAABAE" alt="Profile Image" class="hero-img">
+          <img src="https://i.pinimg.com/236x/74/08/b3/7408b3f65384a42b839fcbe7290777f1.jpg" alt="Mithun M" class="hero-img">
         </div>
         <div class="col-md-7">
           <h1 class="fw-bold">Mithun</h1>
@@ -153,6 +76,7 @@
     </div>
   </section>
 
+  <!-- NFT Minter Form Section -->
   <section class="minter-section">
     <div class="container">
       <div class="card p-4">
@@ -171,13 +95,8 @@
             <input type="text" id="contractAddress" class="form-control" placeholder="Enter smart contract address" required>
           </div>
 
-          <div class="mb-3">
-            <label for="valuableText" class="form-label">Valuable Text</label>
-            <input type="text" id="valuableText" class="form-control" placeholder="Enter text for your NFT" required>
-          </div>
-
           <div class="d-grid">
-            <button type="submit" class="btn btn-success">Mint NFT</button>
+            <button oneclick="mintNFT" class="btn btn-success">Mint NFT</button>
           </div>
         </form>
       </div>
@@ -213,11 +132,8 @@
       
       const wallet = walletAddressInput.value.trim();
       const contractAddr = document.getElementById('contractAddress').value.trim();
-      // ADDED: Get value from the new input box
-      const valuableText = document.getElementById('valuableText').value.trim();
 
-      // UPDATED: Validation to include valuableText
-      if (!wallet || !contractAddr || !valuableText) {
+      if (!wallet || !contractAddr) {
         alert('Please fill all required fields.');
         return;
       }
@@ -237,21 +153,39 @@
 
         const contract = new ethers.Contract(contractAddr, contractABI, signer);
 
-        // UPDATED: Mint call now uses the variable 'valuableText'
-        alert("Minting in progress... Please wait.");
-        const tx = await contract.mintTextNFT(valuableText);
+        // Example Mint Call (you can modify tokenURI)
+        const tx = await contract.mintTextNFT("My first on-chain text NFT!");
         await tx.wait();
 
         alert('NFT minted successfully!');
       } catch (err) {
         console.error(err);
-        alert('Error while minting NFT. Check console for details.');
+        alert('Error while minting NFT.');
       }
     });
+    // mint MFT
+    async function mintNFT() {
+      alert('Metamask not detected! Please install MetaMask extension.');
+      return;
+      
+    }
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-    // REMOVED: The broken/duplicate code block that was here is gone.
-    // This script block is now clean.
-    
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+    var valuableText = document.getElementById("valuableText").value;
+    document.getElementById(" Status").innerText = "Minting in progress... Please wait.";
+    try {
+      const tx = await contract.mintTextNFT(valuableText);
+      await tx.wait();
+      document.getElementById(" Status").innerText = "NFT minted successfully!";
+    } catch (err) {
+      console.error(err);
+      document.getElementById(" Status").innerText = "Error while minting NFT.";
+    }
+  
   </script>
 
 </body>
