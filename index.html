@@ -1,196 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NFT Minter DApp Made By Mithun M</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFT Minter DApp - Mithun</title>
+
+  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Ethers.js -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: 'Inter', sans-serif;
     }
-    .hero-section {
-      padding: 60px 0;
-      background: linear-gradient(135deg, #007bff, #6610f2);
-      color: white;
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+      padding: 40px 15px;
     }
-    .hero-img {
-      width: 200px;
-      height: 200px;
+    .hero-img img {
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
+      border: 3px solid #00d1b2;
       object-fit: cover;
-      border: 5px solid white;
+      box-shadow: 0 0 20px rgba(0, 209, 178, 0.3);
+    }
+    .hero-text h1 {
+      font-size: 2rem;
+      margin-top: 15px;
+    }
+    .hero-text p {
+      color: #9ba3af;
+      font-size: 1.1rem;
     }
     .minter-section {
-      padding: 60px 0;
+      background: #161b22;
+      padding: 60px 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
-    .card {
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .form-control {
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      color: #e6edf3;
     }
-    footer {
-      background-color: #212529;
-      color: white;
-      padding: 15px 0;
-      text-align: center;
+    .form-control:focus {
+      background-color: #0d1117;
+      color: #fff;
+      border-color: #00d1b2;
+      box-shadow: none;
+    }
+    .btn-primary {
+      background-color: #00d1b2;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #00bfa3;
+    }
+    .status {
+      font-size: 0.9rem;
+      margin-top: 10px;
+      color: #9ba3af;
     }
   </style>
 </head>
 <body>
-  <!--Sticky Navbar with Link to LinkdIn and Github and Begins with Name : NFt Miner-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">NFT Minter</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/mithun-m-307608291/" target="_blank">LinkedIn</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/SupremeOne3000" target="_blank">GitHub</a>
-          </li>
-        </ul>
+    <!-- Sticky Navbar with Link to LinkedIn and github and Begins with Name : NFT Minter  -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">NFT Minter</a>
+        <div class="d-flex">
+          <a class="nav-link text-light" href="https://www.linkedin.com/in/mithun-m-307608291/" target="_blank">LinkedIn &nbsp;&nbsp;&nbsp;</a>
+          <a class="nav-link text-light" href="https://github.com/SupremeOne3000" target="_blank"> &nbsp;&nbsp;GitHub</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>   
 
   <!-- Hero Section -->
-  <section class="hero-section text-center text-md-start">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-5 mb-4 mb-md-0 text-center">
-          <img src="https://i.pinimg.com/236x/74/08/b3/7408b3f65384a42b839fcbe7290777f1.jpg" alt="Mithun M" class="hero-img">
-        </div>
-        <div class="col-md-7">
-          <h1 class="fw-bold">Mithun</h1>
-          <h5 class="mb-3">5th Sem ECE Student - Blockchain Enthusiast</h5>
-          <p>Welcome to my NFT Minter DApp — connect your wallet, interact with a smart contract, and mint NFTs on the Sepolia Test Network using MetaMask.</p>
-        </div>
+  <section class="hero container">
+
+    <div class="row align-items-center w-100">
+      <div class="col-md-6 mb-4 mb-md-0 hero-img text-center">
+        <img src="https://i.pinimg.com/236x/74/08/b3/7408b3f65384a42b839fcbe7290777f1.jpg" alt="Mithun">
+      </div>
+      <div class="col-md-6 text-md-start hero-text">
+        <h1>Hi, I'm <span class="text-info">Mithun</span></h1>
+        <p>5th Sem ECE Student — Blockchain Enthusiast</p>
       </div>
     </div>
   </section>
 
-  <!-- NFT Minter Form Section -->
+  <!-- NFT Minter Section -->
   <section class="minter-section">
     <div class="container">
-      <div class="card p-4">
-        <h3 class="text-center mb-4 fw-semibold">NFT Minter Interface</h3>
-        <form id="mintForm" novalidate>
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">NFT Minter DApp</h2>
+        <p class="text-secondary">Mint your NFT on Sepolia Testnet using MetaMask</p>
+      </div>
+
+      <div class="card bg-dark text-light p-4 border-0 shadow-lg">
+        <form id="mintForm">
           <div class="mb-3">
             <label for="walletAddress" class="form-label">Wallet Address</label>
             <div class="input-group">
-              <input type="text" id="walletAddress" class="form-control" placeholder="Connect your wallet" readonly required>
-              <button class="btn btn-primary" type="button" id="connectWallet">Connect</button>
+              <input type="text" class="form-control" id="walletAddress" placeholder="Connect your MetaMask wallet" readonly>
+              <button type="button" id="connectWallet" class="btn btn-primary">Connect</button>
             </div>
           </div>
 
+          <!-- Valuable Text -->
+          <div class="mb-3">
+            <label for="valuableText" class="form-label">Valuable Text</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="valuableText" placeholder="Enter valuable text" required>
+            </div>
+          </div>
+
+
           <div class="mb-3">
             <label for="contractAddress" class="form-label">Smart Contract Address</label>
-            <input type="text" id="contractAddress" class="form-control" placeholder="Enter smart contract address" required>
+            <input type="text" class="form-control" id="contractAddress" placeholder="0x..." required>
           </div>
 
           <div class="d-grid">
-            <button oneclick="mintNFT" class="btn btn-success">Mint NFT</button>
+            <button onclick="mintNFT()" class="btn btn-primary btn-lg">Mint NFT</button>
           </div>
+          <div id="status" class="status"></div>
         </form>
-        <input
-  type="text" id="valuableText" placeholder="Enter valuable text for NFT" class="form-control mt-3" />
-
       </div>
     </div>
-    <div class = "d-grid">
   </section>
 
-  <footer>
-    <p>© 2025 Mithun | NFT Minter DApp</p>
-  </footer>
-
   <script>
-    const connectWalletBtn = document.getElementById('connectWallet');
+    let provider, signer, userAddress;
+
+    const CONTRACT_ADDRESS = "0x04a6152127B04b984A420Dca3D7bd794358eaE3e";
+    const ABI = [
+      {
+        "inputs": [{"internalType":"string","name":"text","type":"string"}],
+        "name":"mintTextNFT",
+        "outputs":[{"internalType":"uint256","name":"","type":"uint256"}],
+        "stateMutability":"nonpayable","type":"function"
+      },
+      {
+        "inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],
+        "name":"getText",
+        "outputs":[{"internalType":"string","name":"","type":"string"}],
+        "stateMutability":"view","type":"function"
+      }
+    ];
+    
+    const connectButton = document.getElementById('connectWallet');
     const walletAddressInput = document.getElementById('walletAddress');
-    const mintForm = document.getElementById('mintForm');
+    const form = document.getElementById('mintForm');
+    const status = document.getElementById('status');
 
     // Connect MetaMask
-    connectWalletBtn.addEventListener('click', async () => {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          walletAddressInput.value = accounts[0];
-        } catch (error) {
-          alert('Connection rejected!');
-        }
-      } else {
-        alert('MetaMask not detected! Please install MetaMask extension.');
-      }
-    });
-
-    // Form Validation and Mint Function
-    mintForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const wallet = walletAddressInput.value.trim();
-      const contractAddr = document.getElementById('contractAddress').value.trim();
-
-      if (!wallet || !contractAddr) {
-        alert('Please fill all required fields.');
-        return;
-      }
-
+    connectButton.addEventListener('click', async () => {
       if (typeof window.ethereum === 'undefined') {
-        alert('MetaMask not found.');
+        alert('MetaMask not found! Please install MetaMask extension.');
+        return;
+      }
+      try {
+        await ethereum.request({ method: 'eth_requestAccounts' });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+        userAddress = await signer.getAddress();
+        walletAddressInput.value = userAddress;
+        status.textContent = 'Wallet connected successfully ✅';
+      } catch (error) {
+        console.error(error);
+        status.textContent = 'Wallet connection failed ❌';
+      }
+    });
+
+    // Mint NFT
+    async function mintNFT() {
+      
+      if(!window.ethereum){
+        alert('MetaMask not found! Please install MetaMask extension.');
         return;
       }
 
+      await window.ethereum.request({ method: 'eth_requestAccounts' }); 
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+
+      var valuableText = document.getElementById('valuableText').value;
+      document.getElementById('status').innerText = 'Minting in progress... ⏳';
       try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-
-        const contractABI = [
-          "function mintTextNFT(string memory text) public returns (uint256)"
-        ];
-
-        const contract = new ethers.Contract(contractAddr, contractABI, signer);
-
-        // Example Mint Call (you can modify tokenURI)
-        const tx = await contract.mintTextNFT("My first on-chain text NFT!");
+        const tx = await contract.mintTextNFT(valuableText);
         await tx.wait();
-
-        alert('NFT minted successfully!');
-      } catch (err) {
-        console.error(err);
-        alert('Error while minting NFT.');
+        document.getElementById('status').innerText = 'NFT Minted Successfully!  🎉';
+      }  catch (error) {
+        console.error(error);
+        document.getElementById('status').innerText = 'Minting failed ❌';
       }
-    });
-    // mint MFT
-    async function mintNFT() {
-      alert('Metamask not detected! Please install MetaMask extension.');
-      return;
-      
     }
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-    var valuableText = document.getElementById("valuableText").value;
-    document.getElementById(" Status").innerText = "Minting in progress... Please wait.";
-    try {
-      const tx = await contract.mintTextNFT(valuableText);
-      await tx.wait();
-      document.getElementById(" Status").innerText = "NFT minted successfully!";
-    } catch (err) {
-      console.error(err);
-      document.getElementById(" Status").innerText = "Error while minting NFT.";
-    }
-  
   </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
