@@ -9,12 +9,14 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      /* Neon Theme: Dark background, light text */
+      background-color: #121212;
+      color: #f0f0f0;
     }
     .hero-section {
       padding: 60px 0;
-      background: linear-gradient(135deg, #007bff, #6610f2);
+      /* Neon Theme: Darker gradient */
+      background: linear-gradient(135deg, #1f005c, #000);
       color: white;
     }
     .hero-img {
@@ -22,25 +24,101 @@
       height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid white;
+      /* Neon Theme: Neon cyan border */
+      border: 5px solid #00ffff;
+      box-shadow: 0 0 15px #00ffff;
     }
     .minter-section {
       padding: 60px 0;
     }
     .card {
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      /* Neon Theme: Dark card, neon border */
+      background-color: #1e1e1e;
+      border: 1px solid #00ffff;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
     }
     footer {
-      background-color: #212529;
+      background-color: #1a1a1a;
       color: white;
       padding: 15px 0;
       text-align: center;
+      border-top: 1px solid #333;
+    }
+    
+    /* Neon Text */
+    h1, h3.fw-semibold {
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+    }
+    .navbar-brand {
+      color: #39ff14 !important; /* Neon Green */
+      text-shadow: 0 0 5px #39ff14;
+    }
+    
+    /* Neon Forms */
+    .form-control {
+      background-color: #2a2a2a;
+      color: #f0f0f0;
+      border: 1px solid #444;
+    }
+    .form-control:focus {
+      background-color: #2a2a2a;
+      color: #f0f0f0;
+      border-color: #00ffff;
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    }
+    .form-label {
+      color: #f0f0f0;
+    }
+
+    /* Neon Buttons */
+    .btn-primary {
+      background-color: #00ffff;
+      border-color: #00ffff;
+      color: #121212;
+      font-weight: bold;
+      box-shadow: 0 0 8px #00ffff;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+      background-color: #2affff;
+      border-color: #2affff;
+      color: #121212;
+      box-shadow: 0 0 15px #00ffff;
+    }
+    
+    .btn-success {
+      background-color: #39ff14;
+      border-color: #39ff14;
+      color: #121212;
+      font-weight: bold;
+      box-shadow: 0 0 8px #39ff14;
+      transition: all 0.2s ease;
+    }
+    .btn-success:hover, .btn-success:focus {
+      background-color: #5bff3a;
+      border-color: #5bff3a;
+      color: #121212;
+      box-shadow: 0 0 15px #39ff14;
+    }
+
+    .nav-link {
+      color: #f0f0f0;
+    }
+    .nav-link:hover {
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+    }
+
+    /* Make readonly input look correct in dark mode */
+    input:read-only {
+        background-color: #333 !important;
+        color: #aaa !important;
     }
   </style>
 </head>
 <body>
-  <!--Sticky Navbar with Link to LinkdIn and Github and Begins with Name : NFt Miner-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
       <a class="navbar-brand fw-bold" href="#">NFT Minter</a>
@@ -60,12 +138,11 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero-section text-center text-md-start">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-5 mb-4 mb-md-0 text-center">
-          <img src="data:image/png;base64,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" alt="Aroop Image" class="hero-img">
+          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fbeaus81%2Fcool-profile-pics-yall%2F&psig=AOvVaw1hV8p4Qv3THgqfnPf9sSYi&ust=1761884446120000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMiB_ZeJy5ADFQAAAAAdAAAAABAE" alt="Profile Image" class="hero-img">
         </div>
         <div class="col-md-7">
           <h1 class="fw-bold">Mithun</h1>
@@ -76,7 +153,6 @@
     </div>
   </section>
 
-  <!-- NFT Minter Form Section -->
   <section class="minter-section">
     <div class="container">
       <div class="card p-4">
@@ -93,6 +169,11 @@
           <div class="mb-3">
             <label for="contractAddress" class="form-label">Smart Contract Address</label>
             <input type="text" id="contractAddress" class="form-control" placeholder="Enter smart contract address" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="valuableText" class="form-label">Valuable Text</label>
+            <input type="text" id="valuableText" class="form-control" placeholder="Enter text for your NFT" required>
           </div>
 
           <div class="d-grid">
@@ -132,8 +213,11 @@
       
       const wallet = walletAddressInput.value.trim();
       const contractAddr = document.getElementById('contractAddress').value.trim();
+      // ADDED: Get value from the new input box
+      const valuableText = document.getElementById('valuableText').value.trim();
 
-      if (!wallet || !contractAddr) {
+      // UPDATED: Validation to include valuableText
+      if (!wallet || !contractAddr || !valuableText) {
         alert('Please fill all required fields.');
         return;
       }
@@ -153,16 +237,21 @@
 
         const contract = new ethers.Contract(contractAddr, contractABI, signer);
 
-        // Example Mint Call (you can modify tokenURI)
-        const tx = await contract.mintTextNFT("My first on-chain text NFT!");
+        // UPDATED: Mint call now uses the variable 'valuableText'
+        alert("Minting in progress... Please wait.");
+        const tx = await contract.mintTextNFT(valuableText);
         await tx.wait();
 
         alert('NFT minted successfully!');
       } catch (err) {
         console.error(err);
-        alert('Error while minting NFT.');
+        alert('Error while minting NFT. Check console for details.');
       }
     });
+
+    // REMOVED: The broken/duplicate code block that was here is gone.
+    // This script block is now clean.
+    
   </script>
 
 </body>
