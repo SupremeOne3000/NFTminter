@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NFT Minter DApp -Mithun</title>
 
-  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Ethers.js -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
   <style>
@@ -48,7 +46,7 @@
     .form-control {
       background-color: #ffffff;
       border: 1px solid #30363d;
-      color: #212529; /* <-- ADD THIS LINE to make text dark on a white background */
+      color: #212529;
     }
     .form-control:focus {
       background-color: #020c1a;
@@ -67,10 +65,32 @@
       font-size: 0.9rem;
       margin-top: 10px;
     }
+    .nft-gallery-section {
+      padding: 60px 15px;
+    }
+    .nft-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      height: 100%;
+    }
+    .nft-card h5 {
+      color: #00d1b2;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .nft-card p {
+      font-size: 1.2rem;
+      color: #e6edf3;
+      word-wrap: break-word;
+      margin-bottom: 0;
+    }
 </style>
 </head>
 <body>
-    <!-- Sticky Navbar with Link to LinkedIn and github and Begins with Name : NFT Minter  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container">
         <a class="navbar-brand fw-bold" href="#">NFT Minter</a>
@@ -81,7 +101,6 @@
       </div>
     </nav>   
 
-  <!-- Hero Section -->
   <section class="hero container">
     <div class="row align-items-center w-100">
       <div class="col-md-6 mb-4 mb-md-0 hero-img text-center">
@@ -94,7 +113,6 @@
     </div>
   </section>
 
-  <!-- NFT Minter Section -->
   <section class="minter-section">
     <div class="container">
       <div class="text-center mb-4">
@@ -112,14 +130,12 @@
             </div>
           </div>
 
-          <!-- Valuable Text -->
           <div class="mb-3">
             <label for="valuableText" class="form-label">Valuable Text</label>
             <div class="input-group">
               <input type="text" class="form-control" id="valuableText" placeholder="Enter valuable text" required>
             </div>
           </div>
-
 
           <div class="mb-3">
             <label for="contractAddress" class="form-label">Smart Contract Address</label>
@@ -131,9 +147,7 @@
           </div>
           <div id="status" class="status"></div>
 
-          <!-- Get Text NFT -->
-          <div class="mb-3">
-            <label for="nftMessageId" class="form-label">Enter NFT Message Id</label>
+          <div class="mb-3 mt-4"> <label for="nftMessageId" class="form-label">Enter NFT Message Id</label>
             <div class="input-group">
               <input type="text" class="form-control" id="nftMessageId" placeholder="Enter NFT Message Id" required>
             </div>
@@ -143,17 +157,27 @@
             <button onclick="getNFTData()" class="btn btn-primary btn-lg">Call NFT Data</button>
           </div>
 
-          <p id="nftMessage"></p>
-
-        </form>
+          <p id="nftMessage" class="mt-2"></p> <hr class="my-4" style="color: #30363d;"> <div class="d-grid">
+            <button type="button" onclick="listNFTs()" class="btn btn-secondary btn-lg">List All NFTs</button>
+          </div>
+          </form>
       </div>
     </div>
   </section>
 
+  <section class="nft-gallery-section">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">NFT Gallery (First 10 IDs)</h2>
+      <div id="nft-gallery-row" class="row g-4">
+        </div>
+    </div>
+  </section>
   <script>
     let provider, signer, userAddress;
 
     const CONTRACT_ADDRESS = "0xd0513262999Cc34f62b30e5b8Fc67920a18F077B";
+    
+    // --- THIS IS YOUR ORIGINAL, CORRECT ABI ---
     const ABI = [
       {
         "inputs": [{"internalType":"string","name":"text","type":"string"}],
@@ -168,6 +192,7 @@
         "stateMutability":"view","type":"function"
       }
     ];
+    // --- END ABI ---
     
     const connectButton = document.getElementById('connectWallet');
     const walletAddressInput = document.getElementById('walletAddress');
@@ -195,17 +220,16 @@
 
     // Mint NFT
     async function mintNFT() {
-      
       if(!window.ethereum){
         alert('MetaMask not found! Please install MetaMask extension.');
         return;
       }
-
-      await window.ethereum.request({ method: 'eth_requestAccounts' }); 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      if (!signer) {
+        await ethereum.request({ method: 'eth_requestAccounts' });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+      }
       const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-
       var valuableText = document.getElementById('valuableText').value;
       document.getElementById('status').innerText = 'Minting in progress... ⏳';
       try {
@@ -220,29 +244,77 @@
 
     // Get NFT Data
     async function getNFTData() {
-
       if(!window.ethereum){
         alert('MetaMask not found! Please install MetaMask extension.');
         return;
       }
-
-      await window.ethereum.request({ method: 'eth_requestAccounts' }); 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      if (!signer) {
+        await ethereum.request({ method: 'eth_requestAccounts' });
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+      }
       const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-
       var nftMessageId = document.getElementById('nftMessageId').value;
       document.getElementById('nftMessage').innerText = 'Fetching NFT data... ⏳';
-      
       try {
         const message = await contract.getText(nftMessageId);
         document.getElementById('nftMessage').innerText = 'NFT Message: ' + message;
       }  catch (error) {
         console.error(error);
         document.getElementById('nftMessage').innerText = 'Failed to fetch NFT data ❌';
+      }
     }
-  
+
+    // --- UPDATED "LIST NFTs" FUNCTION ---
+    // This function now loops from ID 0 to 9 and tries to find existing tokens.
+    async function listNFTs() {
+      // 1. Check if we have a provider (connection to the blockchain)
+      if (!provider) {
+        alert('Please connect your wallet first to establish a network connection.');
+        return;
+      }
+
+      const gallery = document.getElementById('nft-gallery-row');
+      gallery.innerHTML = '<p class="text-center text-light">Scanning for NFTs (ID 0-9)... ⏳</p>';
+
+      // 2. Instantiate the contract using the 'provider' (for read-only)
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
+      
+      gallery.innerHTML = ''; // Clear the "loading" message
+      let nftsFound = 0;
+
+      // 3. Loop from 0 to 9 and try to get text for each ID
+      for (let i = 0; i < 10; i++) {
+        try {
+          // 4. Try to get the text for the current Token ID
+          const text = await contract.getText(i);
+          
+          // 5. If it succeeds and text is not empty, it's a valid NFT
+          if(text) {
+            nftsFound++;
+            const cardHtml = `
+              <div class="col-md-4">
+                <div class="nft-card">
+                  <h5>Token ID: ${i}</h5>
+                  <p>"${text}"</p>
+                </div>
+              </div>
+            `;
+            gallery.insertAdjacentHTML('beforeend', cardHtml);
+          }
+        } catch (error) {
+          // This token ID probably doesn't exist. We just ignore the error.
+          // console.log(`Token ID ${i} not found or error:`, error);
+        }
+      }
+
+      // 6. If no NFTs were found after looping
+      if (nftsFound === 0) {
+        gallery.innerHTML = '<p class="text-center text-light">No NFTs found with Token IDs 0-9.</p>';
+      }
     }
+    // --- END NEW FUNCTION ---
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
