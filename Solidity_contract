@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.3/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.3/contracts/utils/Counters.sol";
+
+contract TextNFT is ERC721URIStorage {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+    mapping(uint256 => string) private _tokenTexts;
+
+    constructor() ERC721("TextNFT", "TNFT") {}
+
+    function mintTextNFT(string memory text) public returns (uint256) {
+        _tokenIds.increment();
+        uint256 newTokenId = _tokenIds.current();
+        _mint(msg.sender, newTokenId);
+        _tokenTexts[newTokenId] = text;
+        return newTokenId;
+    }
+
+    function getText(uint256 tokenId) public view returns (string memory) {
+        require(_exists(tokenId), "Token does not exist");
+        return _tokenTexts[tokenId];
+    }
+}
